@@ -25,7 +25,7 @@ public class CBoardVO {
 	@Id	// PK 설정
 	@GeneratedValue
 	@Column(name = "BNum")	// @Column : 컬럼의 이름을 설정 (ARTICLE_ID)
-	private int BNum;
+	private Long BNum;
 	
 	@Column(name = "Btitle")
 	private String Btitle;

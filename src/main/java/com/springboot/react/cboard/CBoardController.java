@@ -20,10 +20,12 @@ import com.springboot.react.cboard.CBoardService;
 import com.springboot.react.cboard.CBoardVO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/Cboard")
+//@RequestMapping("/Cboard")
 public class CBoardController {
 
 	// @RequiredArgsConstructor : private final이 붙은 필드의 생성자를 자동으로 추가해주고, @Autowired를 통해 주입도 자동으로 해주는 롬복 애노테이션
@@ -76,6 +78,7 @@ public class CBoardController {
 	@GetMapping("/community/read.do")
 	public CBoardVO selectById(CBoardVO vo) {
 		vo = cboardService.selectById(vo);
+		System.out.println(vo);
 		return vo;
 		
 	}
