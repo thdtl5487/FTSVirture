@@ -26,8 +26,8 @@ public class CBoardService {
 	private final CBoardRepository cboardDAO;
 
 	
-	public CBoardVO selectById(int BNum) {
-		return cboardDAO.selectById(BNum);
+	public CBoardVO selectById(CBoardVO vo) {
+		return cboardDAO.selectById(vo);
 	}
 
 	// select 쿼리처럼 조회하는 것이 아닌 insert, update, delete의 경우 @Transactional 애노테이션을 붙여 트랜잭션 처리를 해줘야함
@@ -38,16 +38,16 @@ public class CBoardService {
 	}
 	
 	@Transactional
-	public void update(int BNum, String Btitle, String Btext,String bwriter) {
-		CBoardVO selected = cboardDAO.selectById(BNum);
+	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
+		CBoardVO selected = cboardDAO.selectById(vo);
 		selected.setBtitle(Btitle);
 		selected.setBtext(Btext);
 		selected.setBwriter(bwriter);
 	}
 	
 	@Transactional
-	public void delete(int BNum) {
-		CBoardVO selected = cboardDAO.selectById(BNum);
+	public void delete(CBoardVO vo) {
+		CBoardVO selected = cboardDAO.selectById(vo);
 		cboardDAO.delete(selected);
 	}
 	

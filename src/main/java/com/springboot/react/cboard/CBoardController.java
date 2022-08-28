@@ -74,8 +74,8 @@ public class CBoardController {
 	
 	// 게시글 조회
 	@GetMapping("/community/read.do")
-	public CBoardVO selectById(@RequestParam(value = "Bnum") int Bnum) {
-		CBoardVO vo = cboardService.selectById(Bnum);
+	public CBoardVO selectById(CBoardVO vo) {
+		vo = cboardService.selectById(vo);
 		return vo;
 		
 	}
@@ -88,8 +88,8 @@ public class CBoardController {
 //	
 //	// 게시글 수정
 	@PutMapping("/modify.do")
-	public void update(int BNum, String btitle, String btext, String bwriter) {
-		cboardService.update(BNum, btitle, btext,bwriter);
+	public void update(CBoardVO vo, String btitle, String btext, String bwriter) {
+		cboardService.update(vo, btitle, btext,bwriter);
 		
 	}
 //	
@@ -101,8 +101,8 @@ public class CBoardController {
 //	
 	// 게시글 삭제
 	@DeleteMapping("/delete.do")
-	public void delete(int BNum) {
-		cboardService.delete(BNum);
+	public void delete(CBoardVO vo) {
+		cboardService.delete(vo);
 		
 	}
 //	

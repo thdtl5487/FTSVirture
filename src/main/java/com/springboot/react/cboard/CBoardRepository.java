@@ -43,7 +43,7 @@ public class CBoardRepository{
 		em.persist(vo);								
 	}
 	
-	public CBoardVO selectById(int BNum) {
+	public CBoardVO selectById(CBoardVO vo) {
 		
 		CBoardVO result = null;
 		try {
