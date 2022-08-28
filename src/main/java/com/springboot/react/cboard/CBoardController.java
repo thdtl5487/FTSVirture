@@ -7,9 +7,11 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,31 +65,33 @@ public class CBoardController {
 //		return "views/insertForm";
 //	}
 //	
-//	// 게시글 등록
-//	@PostMapping("/community/write.do")
-//	public String insert(CBoardVO vo) {
-//		cboardService.insert(vo);
-//		return "views/insertSuccess";
-//	}
-//	
-//	// 게시글 조회
-//	@RequestMapping("/community/read.do")
-//	public String selectById(CBoardVO cboard) {
-//		return "views/readArticle";
-//	}
-//	
-//	// 게시글 수정 폼
-//	@GetMapping("/community/modify.do")
-//	public String updateForm() {
-//		return "views/updateForm";
+	// 게시글 등록
+	@PostMapping("/insertProcess.do")
+	public void insert(CBoardVO vo) {
+		cboardService.insert(vo);
+		
+	}
+	
+	// 게시글 조회
+	@GetMapping("/community/read.do")
+	public CBoardVO selectById(@RequestParam(value = "Bnum") int Bnum) {
+		CBoardVO vo = cboardService.selectById(Bnum);
+		return vo;
+		
+	}
+	
+	// 게시글 수정 폼
+//	@PutMapping("/modify.do")
+//	public CBoardVO updateForm(int BNum) {
+//		cboardService.update(BNum, String Btitle, Btext, bwriter);
 //	}
 //	
 //	// 게시글 수정
-//	@PostMapping("/community/modify.do")
-//	public String update(CBoardVO vo, String btitle, String btext, String bwriter) {
-//		cboardService.update(vo, btitle, btext,bwriter);
-//		return "views/updateSuccess";
-//	}
+	@PutMapping("/modify.do")
+	public void update(int BNum, String btitle, String btext, String bwriter) {
+		cboardService.update(BNum, btitle, btext,bwriter);
+		
+	}
 //	
 //	// 게시글 삭제 폼
 //	@GetMapping("/community/delete.do")
@@ -95,12 +99,12 @@ public class CBoardController {
 //		return "views/deleteForm";
 //	}
 //	
-//	// 게시글 삭제
-//	@PostMapping("/community/delete.do")
-//	public String delete(CBoardVO vo) {
-//		cboardService.delete(vo);
-//		return "views/deleteSuccess";
-//	}
+	// 게시글 삭제
+	@DeleteMapping("/delete.do")
+	public void delete(int BNum) {
+		cboardService.delete(BNum);
+		
+	}
 //	
 //
 //   
