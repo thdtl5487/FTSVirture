@@ -47,7 +47,7 @@ public class CBoardRepository{
 		
 		CBoardVO result = null;
 		try {
-			result = em.createQuery("select a from CBoardVO a where a.BNum from CBoardVO a)",CBoardVO.class).getSingleResult();
+			result = em.createQuery("select a from CBoardVO a where a.BNum",CBoardVO.class).getSingleResult();
 													// em.createQuery : JPA를 통해 쿼리문을 직접 입력할 때
 													// getSingleResult() : 값이 단 하나일 경우를 처리하는 메소드 (0개나 2개 이상일 경우를 예외처리 해줘야함) 
 		}
