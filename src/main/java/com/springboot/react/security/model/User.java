@@ -30,7 +30,6 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "User_Table")
-
 public class User {
 	
 	@Id
