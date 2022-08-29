@@ -25,6 +25,7 @@ public class CBoardService {
 	// @RequiredArgsConstructor : private final이 붙은 필드의 생성자를 자동으로 추가해주고, @Autowired를 통해 주입도 자동으로 해주는 롬복 애노테이션
 	private final CBoardRepository cboardDAO;
 
+
 	
 	public CBoardVO selectById(CBoardVO vo) {
 		return cboardDAO.selectById(vo);
@@ -43,19 +44,20 @@ public class CBoardService {
 		selected.setBtitle(Btitle);
 		selected.setBtext(Btext);
 		selected.setBwriter(bwriter);
+		cboardDAO.insert(selected);
 	}
-	
+//	
 	@Transactional
 	public void delete(CBoardVO vo) {
 		CBoardVO selected = cboardDAO.selectById(vo);
 		cboardDAO.delete(selected);
 	}
-	
-	
-   public List<CBoardVO> getList(CBoardVO vo){
-	      return cboardDAO.getList(vo);
-   }
-   
+//	
+//	
+//   public List<CBoardVO> getList(CBoardVO vo){
+//	      return cboardDAO.getList(vo);
+//   }
+//   
    public ResponseEntity<Map> getPagingBoard(Integer pageNum){
 	   return cboardDAO.getPagingBoard(pageNum);
    }
