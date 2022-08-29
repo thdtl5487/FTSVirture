@@ -41,8 +41,8 @@ public class CBoardService {
 	@Transactional
 	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
 		CBoardVO selected = cboardDAO.selectById(vo);
-		selected.setBtitle(Btitle);
-		selected.setBtext(Btext);
+		selected.setBtitle(vo.getBtitle());
+		selected.setBtext(vo.getBtext());
 		selected.setBwriter(bwriter);
 		cboardDAO.insert(selected);
 	}
