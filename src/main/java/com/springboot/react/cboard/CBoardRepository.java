@@ -40,7 +40,14 @@ public class CBoardRepository{
 
 	public void insert(CBoardVO vo) {
 		// em.persist : JPA를 통해 값을 입력할 때 활용합니다.
-		cboardRepository.save(vo)							;
+		CBoardVO newVo = new CBoardVO();
+		
+		newVo.setBtitle(vo.getBtitle());
+		newVo.setBtext(vo.getBtext());
+		newVo.setBwriter(vo.getBwriter());
+		newVo.setBregDate(vo.getBregDate());
+		
+		cboardRepository.save(newVo)		 					;
 	}
 	
 	public CBoardVO selectById(CBoardVO vo) {
@@ -66,23 +73,6 @@ public class CBoardRepository{
 	public void delete(CBoardVO vo) {
 		cboardRepository.deleteById(vo.getBNum());							// em.remove : JPA를 통해 값을 제거할 때
 	}
-	
-	public List<CBoardVO> getList(CBoardVO vo){
-	      
-//		List getList = em.createQuery("select b from CBoardVO b").setFirstResult(0).setMaxResults(9).getResultList();
-		Sort sortNum = Sort.by("BNum").descending(); 
-		Pageable pageable = PageRequest.of(0, 10, sortNum);
-		
-		Page<CBoardVO> getList = cboardRepository.findAll(pageable);
-		
-		List<CBoardVO> result = new ArrayList<CBoardVO>();
-		
-		if(getList != null && getList.hasContent()) {
-			result = getList.getContent();
-		}
-		
-		return result;
-	   }
 	   
 	// 페이징된 게시물 리스트와 페이징 정보(현재 페이지, 최대 페이지 번호)를 HashMap 타입으로 저장하는 메소드
 	public ResponseEntity<Map> getPagingBoard(Integer pageNum){
