@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/Cboard")
+@RequestMapping("/community")
 public class CBoardController {
 
 	// @RequiredArgsConstructor : private final이 붙은 필드의 생성자를 자동으로 추가해주고, @Autowired를 통해 주입도 자동으로 해주는 롬복 애노테이션
@@ -31,7 +31,7 @@ public class CBoardController {
 	public ResponseEntity<Map> viewCBoardList(@RequestParam(value = "pageNum", required = false)Integer pageNum){
 		System.out.println("@@@viewCBoardList 실행@@@@");
 		if(pageNum == null || pageNum <= 0) {
-			pageNum = 1;
+			pageNum = 0;
 		}
 		return cboardService.getPagingBoard(pageNum);
 	}
