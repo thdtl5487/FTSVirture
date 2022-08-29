@@ -44,19 +44,20 @@ public class CBoardService {
 		selected.setBtitle(Btitle);
 		selected.setBtext(Btext);
 		selected.setBwriter(bwriter);
+		cboardDAO.insert(selected);
 	}
-	
+//	
 	@Transactional
 	public void delete(CBoardVO vo) {
 		CBoardVO selected = cboardDAO.selectById(vo);
 		cboardDAO.delete(selected);
 	}
-	
-	
-   public List<CBoardVO> getList(CBoardVO vo){
-	      return cboardDAO.getList(vo);
-   }
-   
+//	
+//	
+//   public List<CBoardVO> getList(CBoardVO vo){
+//	      return cboardDAO.getList(vo);
+//   }
+//   
    public ResponseEntity<Map> getPagingBoard(Integer pageNum){
 	   return cboardDAO.getPagingBoard(pageNum);
    }

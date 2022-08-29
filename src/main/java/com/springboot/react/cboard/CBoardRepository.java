@@ -34,13 +34,13 @@ public class CBoardRepository{
 	// @PersistenceContext : JPA의 ORM을 처리해주는 EntityManager을 불러올 때 쓰는 애노테이션 입니다.
 	@PersistenceContext	
 	private final EntityManager em;
-	private final CBoardRepositoryInterface jpa;
+
 	@Autowired
-	CBoardRepositoryInterface cboardRepository;
+	private CBoardRepositoryInterface cboardRepository;
 
 	public void insert(CBoardVO vo) {
 		// em.persist : JPA를 통해 값을 입력할 때 활용합니다.
-		em.persist(vo);								
+		cboardRepository.save(vo)							;
 	}
 	
 	public CBoardVO selectById(CBoardVO vo) {
@@ -51,7 +51,7 @@ public class CBoardRepository{
 													// em.createQuery : JPA를 통해 쿼리문을 직접 입력할 때
 													// getSingleResult() : 값이 단 하나일 경우를 처리하는 메소드 (0개나 2개 이상일 경우를 예외처리 해줘야함) 
 			
-			jpa.findById(vo.getBNum());
+			cboardRepository.findById(vo.getBNum());
 		}
 		catch (NoResultException e) {				// 1. 값이 0개일 경우 예외처리
 			System.out.println("No Result");
@@ -64,7 +64,7 @@ public class CBoardRepository{
 	}
 	
 	public void delete(CBoardVO vo) {
-		em.remove(vo);								// em.remove : JPA를 통해 값을 제거할 때
+		cboardRepository.deleteById(vo.getBNum());							// em.remove : JPA를 통해 값을 제거할 때
 	}
 	
 	public List<CBoardVO> getList(CBoardVO vo){
