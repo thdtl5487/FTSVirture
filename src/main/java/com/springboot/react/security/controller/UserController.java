@@ -33,9 +33,9 @@ public class UserController {
 		return "admin";
 	}
 	
-	@GetMapping("/manager")
-	public @ResponseBody String manager() {
-		return "manager";
+	@GetMapping("/joinout")
+	public String Logout() {
+		return "/Logout";
 	}
 	
 	// Spring Security에서 우선적으로 인터셉트 실행됨.

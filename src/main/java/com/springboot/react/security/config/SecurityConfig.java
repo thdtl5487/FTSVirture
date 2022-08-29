@@ -47,7 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.passwordParameter("userpw")
 				.loginPage("/loginForm")    // loginForm 실행 부분 수정 코딩함.
 				.loginProcessingUrl("/login")
-				.defaultSuccessUrl("/");
+				.defaultSuccessUrl("/")
+				.and()
+				.logout()
+				.logoutUrl("/LogoutForm") // 이URL로 가면 알아서 로그아웃됨
+				.logoutSuccessUrl("/") // 로그아웃 성공 후 이동 URL
+				.invalidateHttpSession(true);
+	}
 	}
 	
 	
