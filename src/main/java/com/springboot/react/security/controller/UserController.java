@@ -1,20 +1,20 @@
 package com.springboot.react.security.controller;
 
-import java.io.Console;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.react.security.model.User;
 import com.springboot.react.security.repository.UserRepository;
 
-@Controller
+@CrossOrigin
+@RestController
 public class UserController {
 	
 	@Autowired

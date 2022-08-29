@@ -21,10 +21,13 @@ public class PrincipalDetailsService implements UserDetailsService{
 	// 시큐리티 session(내부 Authentication(내부 UserDetails))
 	@Override
 	public UserDetails loadUserByUsername(String userid) throws UsernameNotFoundException {
+		if(userid == null || userid.equals("")) {
+			throw new UsernameNotFoundException(userid);
+		}
 		User userEntity = userRepository.findByuserid(userid);  // findByUsername : Jpa Query methods
-		if(userEntity != null) {
-			return new PrincipalDetails(userEntity);
+		if(userEntity == null) {
+			throw new UsernameNotFoundException(userid);
 		}	
-		return null;
+		return new PrincipalDetails(userEntity);
 	}
 }
