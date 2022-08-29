@@ -27,9 +27,9 @@ public class CBoardService {
 
 
 	
-	public CBoardVO selectById(CBoardVO vo) {
-		return cboardDAO.selectById(vo);
-	}
+//	public CBoardVO selectById(CBoardVO vo) {
+//		return cboardDAO.selectById(vo);
+//	}
 
 	// select 쿼리처럼 조회하는 것이 아닌 insert, update, delete의 경우 @Transactional 애노테이션을 붙여 트랜잭션 처리를 해줘야함
 	// (commit, rollback 등이 필요한 쿼리문...)
@@ -38,29 +38,29 @@ public class CBoardService {
 		cboardDAO.insert(vo);
 	}
 	
-	@Transactional
-	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
-		CBoardVO selected = cboardDAO.selectById(vo);
-		selected.setBtitle(vo.getBtitle());
-		selected.setBtext(vo.getBtext());
-		selected.setBwriter(bwriter);
-		cboardDAO.insert(selected);
-	}
+//	@Transactional
+//	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
+//		CBoardVO selected = cboardDAO.selectById(vo);
+//		selected.setBtitle(vo.getBtitle());
+//		selected.setBtext(vo.getBtext());
+//		selected.setBwriter(bwriter);
+//		cboardDAO.insert(selected);
+//	}
 //	
-	@Transactional
-	public void delete(CBoardVO vo) {
-		CBoardVO selected = cboardDAO.selectById(vo);
-		cboardDAO.delete(selected);
-	}
+//	@Transactional
+//	public void delete(CBoardVO vo) {
+//		CBoardVO selected = cboardDAO.selectById(vo);
+//		cboardDAO.delete(selected);
+//	}
 //	
 //	
 //   public List<CBoardVO> getList(CBoardVO vo){
 //	      return cboardDAO.getList(vo);
 //   }
 //   
-   public ResponseEntity<Map> getPagingBoard(Integer pageNum){
-	   return cboardDAO.getPagingBoard(pageNum);
-   }
+//   public ResponseEntity<Map> getPagingBoard(Integer pageNum){
+//	   return cboardDAO.getPagingBoard(pageNum);
+//   }
 	
 	
 }
