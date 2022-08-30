@@ -1,21 +1,13 @@
 package com.springboot.react.cboard;
 
-import java.util.List;
 import java.util.Map;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.springboot.react.cboard.CBoardService;
-import com.springboot.react.cboard.CBoardVO;
 
 import lombok.RequiredArgsConstructor;
 
