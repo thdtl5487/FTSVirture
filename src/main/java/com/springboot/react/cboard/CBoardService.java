@@ -38,7 +38,6 @@ public class CBoardService {
 		cboardDAO.insert(vo);
 	}
 	
-<<<<<<< HEAD
 	@Transactional
 	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
 		CBoardVO selected = cboardDAO.selectById(vo);
@@ -53,7 +52,6 @@ public class CBoardService {
 		CBoardVO selected = cboardDAO.selectById(vo);
 		cboardDAO.delete(selected);
 	}
-=======
 //	@Transactional
 //	public void update(CBoardVO vo, String Btitle, String Btext,String bwriter) {
 //		CBoardVO selected = cboardDAO.selectById(vo);
@@ -67,7 +65,6 @@ public class CBoardService {
 //		CBoardVO selected = cboardDAO.selectById(vo);
 //		cboardDAO.delete(selected);
 //	}
->>>>>>> a1d17f7e82766b9263d7383a22eeee964c953481
 	
 //	
 //   public List<CBoardVO> getList(CBoardVO vo){
