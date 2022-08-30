@@ -25,11 +25,15 @@ import lombok.extern.log4j.Log4j;
 
 @RestController
 @RequiredArgsConstructor
+<<<<<<< HEAD
 
 //@RequestMapping("/community")
 
 @RequestMapping("/Community")
 
+=======
+@RequestMapping("/Community")
+>>>>>>> a1d17f7e82766b9263d7383a22eeee964c953481
 public class CBoardController {
 
 	// @RequiredArgsConstructor : private final이 붙은 필드의 생성자를 자동으로 추가해주고, @Autowired를 통해 주입도 자동으로 해주는 롬복 애노테이션
@@ -53,10 +57,24 @@ public class CBoardController {
 		}
 		return cboardService.getPagingBoard(pageNum);
 	}
+<<<<<<< HEAD
 
+=======
 	
+	@GetMapping("/view.do")
+	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Long bnum){
+		
+		System.out.println("/view.do 테스트"+cboardService.getBoard(bnum));
+		
+		return cboardService.getBoard(bnum);
+	}
+>>>>>>> a1d17f7e82766b9263d7383a22eeee964c953481
 	
-	
+	// 게시글 등록
+	@PostMapping(value = "/insertProcess.do")
+	public void insert(CBoardVO vo) {
+		cboardService.insert(vo);
+	}
 	
 	// 아래 모든 메소드에 request.setAttribute("article", articleService.selectById(vo))를 해주는것과 같은 역할
 //	@ModelAttribute("cboard")
