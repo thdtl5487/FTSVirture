@@ -60,7 +60,7 @@ public class CBoardService {
 	   return cboardDAO.getPagingBoard(pageNum);
    }
    
-   public ResponseEntity<Map> getBoard(Integer bnum){
+   public ResponseEntity<Map> getBoard(Long bnum){
 	   return cboardDAO.getBoard(bnum);
    }
 	

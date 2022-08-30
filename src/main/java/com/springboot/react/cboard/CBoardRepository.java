@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.EntityManager;
@@ -40,7 +41,14 @@ public class CBoardRepository{
 
 	public void insert(CBoardVO vo) {
 		// em.persist : JPA를 통해 값을 입력할 때 활용합니다.
-		em.persist(vo);								
+		CBoardVO newVo = new CBoardVO();
+		
+		newVo.setBtitle(vo.getBtitle());
+		newVo.setBtext(vo.getBtext());
+		newVo.setBwriter(vo.getBwriter());
+		newVo.setBregDate(vo.getBregDate());
+		
+		cboardRepository.save(newVo)		 					;
 	}
 	
 	public CBoardVO selectById(Integer bnum) {
@@ -115,10 +123,17 @@ public class CBoardRepository{
 		return ResponseEntity.ok(result);
 	}
 
-	public ResponseEntity<Map> getBoard(Integer bnum) {
+	public ResponseEntity<Map> getBoard(Long bnum) {
 		Map<String, Object> result = null;
+		System.out.println("getBoard실행?");
+		Optional<CBoardVO> getBoard = null;
+		getBoard = cboardRepository.findById(bnum);
+		System.out.println("getBoard실행22?");
 		
+		result = new HashMap<String, Object>();
 		
+		result.put("board", getBoard);
+		System.out.println(result.get("board"));
 		
 		return ResponseEntity.ok(result);
 	}

@@ -37,14 +37,18 @@ public class CBoardController {
 	}
 	
 	@GetMapping("/view.do")
-	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Integer bnum){
-		System.out.println("view 실행중 bnum : " + bnum);
+	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Long bnum){
+		
+		System.out.println("/view.do 테스트"+cboardService.getBoard(bnum));
 		
 		return cboardService.getBoard(bnum);
 	}
 	
-	
-	
+	// 게시글 등록
+	@PostMapping(value = "/insertProcess.do")
+	public void insert(CBoardVO vo) {
+		cboardService.insert(vo);
+	}
 	
 	// 아래 모든 메소드에 request.setAttribute("article", articleService.selectById(vo))를 해주는것과 같은 역할
 //	@ModelAttribute("cboard")
