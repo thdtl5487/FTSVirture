@@ -43,7 +43,7 @@ public class CBoardRepository{
 		em.persist(vo);								
 	}
 	
-	public CBoardVO selectById(CBoardVO vo) {
+	public CBoardVO selectById(Integer bnum) {
 		
 		CBoardVO result = null;
 		try {
@@ -110,6 +110,14 @@ public class CBoardRepository{
 		result = new HashMap<String, Object>();
 		result.put("list", boardList); // 페이징된 게시물 리스트를 List라는 key에 저장
 		result.put("pageInfo", pageInfo); // 페이징 정보를 pageInfo라는 key에 저장
+		
+		
+		return ResponseEntity.ok(result);
+	}
+
+	public ResponseEntity<Map> getBoard(Integer bnum) {
+		Map<String, Object> result = null;
+		
 		
 		
 		return ResponseEntity.ok(result);
