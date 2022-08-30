@@ -35,9 +35,9 @@ public class CBoardRepository{
 	// @PersistenceContext : JPA의 ORM을 처리해주는 EntityManager을 불러올 때 쓰는 애노테이션 입니다.
 	@PersistenceContext	
 	private final EntityManager em;
-
+	
 	@Autowired
-	private CBoardRepositoryInterface cboardRepository;
+	CBoardRepositoryInterface cboardRepository;
 
 	public void insert(CBoardVO vo) {
 		// em.persist : JPA를 통해 값을 입력할 때 활용합니다.
@@ -55,11 +55,9 @@ public class CBoardRepository{
 		
 		CBoardVO result = null;
 		try {
-//			result = em.createQuery("select a from CBoardVO a where a.BNum",CBoardVO.class).getSingleResult();
+			result = em.createQuery("select a from CBoardVO a where a.BNum = (select max(a.BNum) from CBoardVO a)",CBoardVO.class).getSingleResult();
 													// em.createQuery : JPA를 통해 쿼리문을 직접 입력할 때
 													// getSingleResult() : 값이 단 하나일 경우를 처리하는 메소드 (0개나 2개 이상일 경우를 예외처리 해줘야함) 
-			
-			cboardRepository.findById(vo.getBNum());
 		}
 		catch (NoResultException e) {				// 1. 값이 0개일 경우 예외처리
 			System.out.println("No Result");
@@ -72,8 +70,25 @@ public class CBoardRepository{
 	}
 	
 	public void delete(CBoardVO vo) {
-		cboardRepository.deleteById(vo.getBNum());							// em.remove : JPA를 통해 값을 제거할 때
+		em.remove(vo);								// em.remove : JPA를 통해 값을 제거할 때
 	}
+	
+	public List<CBoardVO> getList(CBoardVO vo){
+	      
+//		List getList = em.createQuery("select b from CBoardVO b").setFirstResult(0).setMaxResults(9).getResultList();
+		Sort sortNum = Sort.by("BNum").descending(); 
+		Pageable pageable = PageRequest.of(0, 10, sortNum);
+		
+		Page<CBoardVO> getList = cboardRepository.findAll(pageable);
+		
+		List<CBoardVO> result = new ArrayList<CBoardVO>();
+		
+		if(getList != null && getList.hasContent()) {
+			result = getList.getContent();
+		}
+		
+		return result;
+	   }
 	   
 	// 페이징된 게시물 리스트와 페이징 정보(현재 페이지, 최대 페이지 번호)를 HashMap 타입으로 저장하는 메소드
 	public ResponseEntity<Map> getPagingBoard(Integer pageNum){
