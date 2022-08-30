@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.EntityManager;
@@ -50,7 +51,7 @@ public class CBoardRepository{
 		cboardRepository.save(newVo)		 					;
 	}
 	
-	public CBoardVO selectById(CBoardVO vo) {
+	public CBoardVO selectById(Integer bnum) {
 		
 		CBoardVO result = null;
 		try {
@@ -103,6 +104,21 @@ public class CBoardRepository{
 		result.put("list", boardList); // 페이징된 게시물 리스트를 List라는 key에 저장
 		result.put("pageInfo", pageInfo); // 페이징 정보를 pageInfo라는 key에 저장
 		
+		
+		return ResponseEntity.ok(result);
+	}
+
+	public ResponseEntity<Map> getBoard(Long bnum) {
+		Map<String, Object> result = null;
+		System.out.println("getBoard실행?");
+		Optional<CBoardVO> getBoard = null;
+		getBoard = cboardRepository.findById(bnum);
+		System.out.println("getBoard실행22?");
+		
+		result = new HashMap<String, Object>();
+		
+		result.put("board", getBoard);
+		System.out.println(result.get("board"));
 		
 		return ResponseEntity.ok(result);
 	}

@@ -7,11 +7,9 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +18,10 @@ import com.springboot.react.cboard.CBoardService;
 import com.springboot.react.cboard.CBoardVO;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j;
-
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/community")
+@RequestMapping("/Community")
 public class CBoardController {
 
 	// @RequiredArgsConstructor : private final이 붙은 필드의 생성자를 자동으로 추가해주고, @Autowired를 통해 주입도 자동으로 해주는 롬복 애노테이션
@@ -35,25 +31,35 @@ public class CBoardController {
 	public ResponseEntity<Map> viewCBoardList(@RequestParam(value = "pageNum", required = false)Integer pageNum){
 		System.out.println("@@@viewCBoardList 실행@@@@");
 		if(pageNum == null || pageNum <= 0) {
-			pageNum = 1;
+			pageNum = 0;
 		}
 		return cboardService.getPagingBoard(pageNum);
 	}
 	
+	@GetMapping("/view.do")
+	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Long bnum){
+		
+		System.out.println("/view.do 테스트"+cboardService.getBoard(bnum));
+		
+		return cboardService.getBoard(bnum);
+	}
 	
-	
-	
+	// 게시글 등록
+	@PostMapping(value = "/insertProcess.do")
+	public void insert(CBoardVO vo) {
+		cboardService.insert(vo);
+	}
 	
 	// 아래 모든 메소드에 request.setAttribute("article", articleService.selectById(vo))를 해주는것과 같은 역할
-	@ModelAttribute("cboard")
-	public CBoardVO getArticle(CBoardVO vo) {
-		return cboardService.selectById(vo);
-	}
-	
-	@ModelAttribute("cboardList")
-	public ResponseEntity<Map> getListForm(Integer pageNum){
-		return cboardService.getPagingBoard(pageNum);
-	}
+//	@ModelAttribute("cboard")
+//	public CBoardVO getArticle(CBoardVO vo) {
+//		return cboardService.selectById(vo);
+//	}
+//	
+//	@ModelAttribute("cboardList")
+//	public List<CBoardVO> getListForm(CBoardVO vo){
+//		return cboardService.getList(vo);
+//	}
 //	
 //	// 홈 화면
 //	@RequestMapping("/")
@@ -67,36 +73,31 @@ public class CBoardController {
 //		return "views/insertForm";
 //	}
 //	
-	// 게시글 등록
-	@PostMapping(value = "/insertProcess.do")
-	public void insert(CBoardVO vo) {
-		System.out.println("씨발정신나갈거같아" + vo.getBNum());
-		System.out.println("실행 안됐을ㅇ듯");
-		cboardService.insert(vo);
-		
-	}
-	
-	// 게시글 조회
-	@GetMapping("/read.do")
-	public CBoardVO selectById(CBoardVO vo) {
-		vo = cboardService.selectById(vo);
-		System.out.println(vo);
-		return vo;
-		
-	}
-	
-	// 게시글 수정 폼
-//	@PutMapping("/modify.do")
-//	public CBoardVO updateForm(int BNum) {
-//		cboardService.update(BNum, String Btitle, Btext, bwriter);
+//	// 게시글 등록
+//	@PostMapping("/community/write.do")
+//	public String insert(CBoardVO vo) {
+//		cboardService.insert(vo);
+//		return "views/insertSuccess";
+//	}
+//	
+//	// 게시글 조회
+//	@RequestMapping("/community/read.do")
+//	public String selectById(CBoardVO cboard) {
+//		return "views/readArticle";
+//	}
+//	
+//	// 게시글 수정 폼
+//	@GetMapping("/community/modify.do")
+//	public String updateForm() {
+//		return "views/updateForm";
 //	}
 //	
 //	// 게시글 수정
-	@PutMapping("/modify.do")
-	public void update(CBoardVO vo, String btitle, String btext, String bwriter) {
-		cboardService.update(vo, btitle, btext, bwriter);
-		
-	}
+//	@PostMapping("/community/modify.do")
+//	public String update(CBoardVO vo, String btitle, String btext, String bwriter) {
+//		cboardService.update(vo, btitle, btext,bwriter);
+//		return "views/updateSuccess";
+//	}
 //	
 //	// 게시글 삭제 폼
 //	@GetMapping("/community/delete.do")
@@ -104,12 +105,12 @@ public class CBoardController {
 //		return "views/deleteForm";
 //	}
 //	
-	// 게시글 삭제
-	@DeleteMapping("/delete.do")
-	public void delete(CBoardVO vo) {
-		cboardService.delete(vo);
-		
-	}
+//	// 게시글 삭제
+//	@PostMapping("/community/delete.do")
+//	public String delete(CBoardVO vo) {
+//		cboardService.delete(vo);
+//		return "views/deleteSuccess";
+//	}
 //	
 //
 //   
