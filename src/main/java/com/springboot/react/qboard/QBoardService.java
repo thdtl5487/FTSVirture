@@ -23,24 +23,24 @@ import lombok.RequiredArgsConstructor;
 public class QBoardService {
 	
 	
-	private final CBoardRepository cboardDAO;
+	private final QBoardRepository qboardDAO;
 
 
 	
 
 	@Transactional
-	public void insert(CBoardVO vo) {
-		cboardDAO.insert(vo);
+	public void insert(QBoardVO vo) {
+		qboardDAO.insert(vo);
 	}
 	
 	
  
    public ResponseEntity<Map> getPagingBoard(Integer pageNum){
-	   return cboardDAO.getPagingBoard(pageNum);
+	   return qboardDAO.getPagingBoard(pageNum);
    }
    
    public ResponseEntity<Map> getBoard(Long bnum){
-	   return cboardDAO.getBoard(bnum);
+	   return qboardDAO.getBoard(bnum);
    }
 	
 	
