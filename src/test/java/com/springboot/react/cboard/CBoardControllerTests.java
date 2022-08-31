@@ -28,43 +28,45 @@ public class CBoardControllerTests {
 	@Autowired
 	private EntityManager em;
 
+//	@Test
+//	public void testInsert() {
+//		
+//		CBoardVO vo = new CBoardVO();
+//		vo.setBtitle("뻨유2");
+//		vo.setBtext("뻨2");
+//		vo.setBwriter("뻨커2");
+//		
+//		
+//		System.out.println(vo.getBNum());
+//		System.out.println(vo.getBtitle());
+//		System.out.println(vo.getBwriter());
+//		System.out.println(vo.getBtext());
+//		repository.save(vo);
+//
+//		
+//	}
+//
+//	@Test
+//	public void testSelectById() {
+//		Optional<CBoardVO> CBoard = repository.findById(1L);
+//		System.out.println(CBoard);
+//
+//	}
+
 	@Test
-	public void testInsert() {
-		
+	public void testUpdate(CBoardVO RequestVO) {
+		RequestVO.setBNum(3L);
 		CBoardVO vo = new CBoardVO();
-		vo.setBtitle("뻨유2");
-		vo.setBtext("뻨2");
-		vo.setBwriter("뻨커2");
+		vo.setBNum(RequestVO.getBNum());
 		
-		
-		System.out.println(vo.getBNum());
-		System.out.println(vo.getBtitle());
-		System.out.println(vo.getBwriter());
-		System.out.println(vo.getBtext());
+		vo.setBtitle("수정하겠다");
+		vo.setBtext("오바");
 		repository.save(vo);
-
-		
-	}
-
-	@Test
-	public void testSelectById() {
-		Optional<CBoardVO> CBoard = repository.findById(1L);
-		System.out.println(CBoard);
-
-	}
-
-	@Test
-	public void testUpdate() {
-		Optional<CBoardVO> vo = repository.findById(2L);
-		vo.ifPresent(selectVO ->{
-			selectVO.setBtitle("수정 제목");
-			selectVO.setBtext("수정내용");
-			repository.save(selectVO);
-		}); 
+	
 		//테스트를 위해 Long을 지정해주기 위해 이러한 형식으로 테스트 했으며
 		//실제 update와는 다른 부분이 있음
 		
-		System.out.println(vo);
+		System.out.println(vo.getBNum());
 		
 		
 		
@@ -72,10 +74,10 @@ public class CBoardControllerTests {
 		
 	}
 //
-	@Test
-	public void testDelete() {
-		Optional<CBoardVO> vo = repository.findById(3L);
-		repository.deleteById(3L);
-	}
+//	@Test
+//	public void testDelete() {
+//		Optional<CBoardVO> vo = repository.findById(3L);
+//		repository.deleteById(3L);
+//	}
 
 }

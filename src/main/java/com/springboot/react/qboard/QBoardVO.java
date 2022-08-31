@@ -1,4 +1,4 @@
-package com.springboot.react.cboard;
+package com.springboot.react.qboard;
 
 import java.util.Date;
 
@@ -24,9 +24,9 @@ import lombok.Setter;
 
 
 @Entity									
-@Table(name = "CBoardTABLE") // 테이블의 이름을 설정 (SPRINGBOOT_CRUD)
+@Table(name = "QBoardTABLE") // 테이블의 이름을 설정 (SPRINGBOOT_CRUD)
 @Data		
-public class CBoardVO {
+public class QBoardVO{
 
 	@Id	// PK 설정
 	@GeneratedValue
