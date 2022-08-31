@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.react.cboard.CBoardVO;
-
 import lombok.RequiredArgsConstructor;
 
 
@@ -31,8 +29,8 @@ public class QBoardController {
 
 
 	@GetMapping("/getList.do")
-	public ResponseEntity<Map> viewCBoardList(@RequestParam(value = "pageNum", required = false)Integer pageNum){
-		System.out.println("@@@viewCBoardList 실행@@@@");
+	public ResponseEntity<Map> viewQBoardList(@RequestParam(value = "pageNum", required = false)Integer pageNum){
+		System.out.println("@@@viewQBoardList 실행@@@@");
 		if(pageNum == null || pageNum <= 0) {
 			pageNum = 0;
 		}
@@ -43,7 +41,7 @@ public class QBoardController {
 
 	
 	@GetMapping("/view.do")
-	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Long bnum){
+	public ResponseEntity<Map> viewQBoard(@RequestParam(value="bnum", required = false)Long bnum){
 		
 		System.out.println("/view.do 테스트"+qboardService.getBoard(bnum));
 		
@@ -52,7 +50,7 @@ public class QBoardController {
 
 
 	@PostMapping("/insertProcess.do")
-	public void insert(CBoardVO vo) {
+	public void insert(QBoardVO vo) {
 		System.out.println("살려주시세요");
 		System.out.println("실행 안됐을ㅇ듯");
 		qboardService.insert(vo);
