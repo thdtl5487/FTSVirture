@@ -50,11 +50,14 @@ public class WebSecurityConfig {
 				.accessDeniedHandler(jwtAccessDeniedHandler)
 				
 				.and()
-				//모든 Requests에 있어서 /auth/**를 제외한 모든 uri의 request는 토큰이 필요하다. 
-				///auth/**는 로그인 페이지를 뜻한다.
+				// 모든 Requests에 있어서 /auth/**를 제외한 모든 uri의 request는 토큰이 필요하다. 
+				// /auth/**는 로그인 페이지를 뜻한다.
 				.authorizeHttpRequests()
 				.antMatchers("/auth/**").permitAll()
-				.anyRequest().authenticated()
+//				.anyRequest().authenticated()
+				// 모든 요청을 인증된 사용자만 접속할 수 있도록 함
+				.anyRequest().permitAll()
+				// 모든 요청을 모두에게 접속 허가함
 				
 				.and()
 				//마지막으로 전에 설정한 JwtSecurityConfig클래스를 통해 tokenProvider를 적용시킨다.
