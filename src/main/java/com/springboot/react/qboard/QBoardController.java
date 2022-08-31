@@ -1,4 +1,4 @@
-package com.springboot.react.cboard;
+package com.springboot.react.qboard;
 
 import java.util.List;
 import java.util.Map;
@@ -30,14 +30,14 @@ import lombok.extern.log4j.Log4j;
 
 
 
-@RequestMapping("/Community")
+@RequestMapping("/QnA")
 
 
-public class CBoardController {
+public class QBoardController {
 
 	
-	private final CBoardService cboardService;
-	private final CBoardRepositoryInterface repository;
+	private final QBoardService qboardService;
+	private final QBoardRepositoryInterface repository;
 	
 
 
@@ -47,7 +47,7 @@ public class CBoardController {
 		if(pageNum == null || pageNum <= 0) {
 			pageNum = 0;
 		}
-		return cboardService.getPagingBoard(pageNum);
+		return qboardService.getPagingBoard(pageNum);
 	}
 
 
@@ -56,9 +56,9 @@ public class CBoardController {
 	@GetMapping("/view.do")
 	public ResponseEntity<Map> viewCBoard(@RequestParam(value="bnum", required = false)Long bnum){
 		
-		System.out.println("/view.do 테스트"+cboardService.getBoard(bnum));
+		System.out.println("/view.do 테스트"+qboardService.getBoard(bnum));
 		
-		return cboardService.getBoard(bnum);
+		return qboardService.getBoard(bnum);
 	}
 
 
@@ -66,16 +66,16 @@ public class CBoardController {
 	public void insert(CBoardVO vo) {
 		System.out.println("살려주시세요");
 		System.out.println("실행 안됐을ㅇ듯");
-		cboardService.insert(vo);
+		qboardService.insert(vo);
 		
 	}
 	
 
 	
 	@PostMapping("/modify.do")
-	public void update(CBoardVO RequestVo) {
+	public void update(QBoardVO RequestVo) {
 		  System.out.println("실행함?" + RequestVo.getBNum());
-		  CBoardVO  vo = repository.findById(RequestVo.getBNum()).orElseThrow(() -> {
+		  QBoardVO  vo = repository.findById(RequestVo.getBNum()).orElseThrow(() -> {
 		        return new IllegalArgumentException("수정에 실패하였습니다.");
 		    });
 		  
@@ -87,9 +87,9 @@ public class CBoardController {
 
 	
 	@PostMapping("/delete.do")
-	public void delete(CBoardVO RequestVo) {
+	public void delete(QBoardVO RequestVo) {
 		System.out.println("삭제 시도는 하냐?" + RequestVo.getBNum());
-	  CBoardVO  vo = repository.findById(RequestVo.getBNum()).orElseThrow(() -> {
+	    QBoardVO  vo = repository.findById(RequestVo.getBNum()).orElseThrow(() -> {
 	        return new IllegalArgumentException("삭제에 실패하였습니다.");
 	    });
 	  

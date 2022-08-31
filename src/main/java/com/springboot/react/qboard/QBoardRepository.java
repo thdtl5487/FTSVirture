@@ -1,4 +1,4 @@
-package com.springboot.react.cboard;
+package com.springboot.react.qboard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,25 +30,25 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class CBoardRepository{
+public class QBoardRepository{
 	
 	// @PersistenceContext : JPA의 ORM을 처리해주는 EntityManager을 불러올 때 쓰는 애노테이션 입니다.
 	@PersistenceContext	
 	private final EntityManager em;
 
 	@Autowired
-	private CBoardRepositoryInterface cboardRepository;
+	private QBoardRepositoryInterface qboardRepository;
 
-	public void insert(CBoardVO vo) {
+	public void insert(QBoardVO vo) {
 		// em.persist : JPA를 통해 값을 입력할 때 활용합니다.
-		CBoardVO newVo = new CBoardVO();
+		QBoardVO newVo = new QBoardVO();
 		
 		newVo.setBtitle(vo.getBtitle());
 		newVo.setBtext(vo.getBtext());
 		newVo.setBwriter(vo.getBwriter());
 		newVo.setBregDate(vo.getBregDate());
 		
-		cboardRepository.save(newVo)		 					;
+		qboardRepository.save(newVo)		 					;
 	}
 	
 	
@@ -62,9 +62,9 @@ public class CBoardRepository{
 		// 1. 리스트 페이징 처리
 		Sort sortNum = Sort.by("BNum").descending(); // Sort 정렬 규칙 선언, BNum 역순
 		Pageable pageable = PageRequest.of(pageNum, 10, sortNum); // 페이징, 매개변수 : (들어온 웹의 페이지 수, amount, 정렬규칙 적용)
-		Page<CBoardVO> pageList = cboardRepository.findAll(pageable); // 페이징된 게시물 리스트를 담는 인스턴스
+		Page<QBoardVO> pageList = qboardRepository.findAll(pageable); // 페이징된 게시물 리스트를 담는 인스턴스
 		
-		List<CBoardVO> boardList = new ArrayList<CBoardVO>(); // pageList를 송신할 수 있는 타입으로 저장하는 인스턴스
+		List<QBoardVO> boardList = new ArrayList<QBoardVO>(); // pageList를 송신할 수 있는 타입으로 저장하는 인스턴스
 		
 		if(pageList != null && pageList.hasContent()) { // pageList에 값 있는지 체크. hasContent는 값 있으면 true 리턴
 			boardList = pageList.getContent(); // pageList의 내용을 boardList에 저장
@@ -91,8 +91,8 @@ public class CBoardRepository{
 	public ResponseEntity<Map> getBoard(Long bnum) {
 		Map<String, Object> result = null;
 		System.out.println("getBoard실행?");
-		Optional<CBoardVO> getBoard = null;
-		getBoard = cboardRepository.findById(bnum);
+		Optional<QBoardVO> getBoard = null;
+		getBoard = qboardRepository.findById(bnum);
 		System.out.println("getBoard실행22?");
 		
 		result = new HashMap<String, Object>();

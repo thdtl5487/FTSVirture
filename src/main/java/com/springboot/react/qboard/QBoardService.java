@@ -1,4 +1,4 @@
-package com.springboot.react.cboard;
+package com.springboot.react.qboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ import com.springboot.react.cboard.CBoardRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Service("cboardService")
+@Service("qboardService")
 @RequiredArgsConstructor
-public class CBoardService {
+public class QBoardService {
 	
 	
 	private final CBoardRepository cboardDAO;
