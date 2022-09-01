@@ -22,6 +22,7 @@ public class MemberRequestDto {
 	private String nickname;
 	
 	 public Member toMember(PasswordEncoder passwordEncoder) {
+		 System.out.println("MemberRequsetDTO toMemer는 언제실행되나요?");
 	        return Member.builder()
 	                .userid(userid)
 	                .password(passwordEncoder.encode(password))
@@ -33,6 +34,7 @@ public class MemberRequestDto {
 	//Request를 받을 때 쓰이는 dto다. UsernamePasswordAuthenticationToken를 반환하여
 	//아이디와 비밀번호가 일치하는지 검증하는 로직을 넣을 수 있게 된다.
 	 public UsernamePasswordAuthenticationToken toAuthentication() {
+		 	System.out.println("toAuthentication메소드는 언제 실행되나요?");
 	        return new UsernamePasswordAuthenticationToken(userid, password);
 	    }
 }

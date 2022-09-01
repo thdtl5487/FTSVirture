@@ -72,7 +72,7 @@ public class TokenProvider {
     			.setExpiration(tokenExpiresIn)
     			.signWith(key, SignatureAlgorithm.HS512)
     			.compact();
-    	
+    	System.out.println("토큰생성은 언제하나요?");
     	return TokenDto.builder()
     			.grantType(BEARER_TYPE)
     			.accessToken(accessToken)
@@ -104,14 +104,18 @@ public class TokenProvider {
     	
     	UserDetails principal = new User(claims.getSubject(), "", authorities);
     	
+    	System.out.println("토큰은 언제 받나요?");
+    	
     	return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     	
     	
     }
     
+    //토큰 검증하기위한 메소드
     public boolean validateToken(String token) {
     	try {
 			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+			System.out.println("토큰이 완벽하나요?");
 			return true;
 		} catch (io.jsonwebtoken.security.SignatureException | MalformedJwtException e) {
 			System.out.println("잘못된 JWT 서명입니다");
@@ -125,10 +129,12 @@ public class TokenProvider {
     	return false;
     }
     
-    
+    //토큰에 담을 클레임(Claim) 정보를 포함하고 있습니다. 클레임은 json 형태로 key-value 한 쌍으로 이루어져 있습니다. 
+    //클레임의 정보는 등록된 (registered) 클레임, 공개(public) 클레임, 비공개(private) 클레임으로 세 종류가 있습니다.
     
     private Claims parseCalims(String accesToken) {
     	try {
+    		System.out.println("토큰에 정보를 뭘담고있나요");
     		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accesToken).getBody();
     	}catch (ExpiredJwtException e) {
     		return e.getClaims();

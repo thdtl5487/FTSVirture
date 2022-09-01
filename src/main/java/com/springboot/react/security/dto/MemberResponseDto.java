@@ -18,6 +18,7 @@ public class MemberResponseDto {
 	private String nickname;
 	
 	public static MemberResponseDto of(Member member) {
+		System.out.println("MemberResponseDto는 언제 실행되나요?");
 		return MemberResponseDto.builder()
 				.userid(member.getUserid())
 				.nickname(member.getNickname())
